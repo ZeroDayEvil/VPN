@@ -193,9 +193,10 @@ func (c *Config) checkForUpdates() error {
 		return err
 	}
 	
-	// Update current config
+	// Update current config while preserving dataDir
+	oldDataDir := c.dataDir
 	*c = *newCfg
-	c.dataDir = c.dataDir
+	c.dataDir = oldDataDir
 	
 	return nil
 }

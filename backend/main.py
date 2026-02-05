@@ -7,6 +7,7 @@ import uuid
 import datetime
 import secrets
 import os
+import json
 
 app = FastAPI(title="VPN One-Click API", version="1.0.0")
 
@@ -237,10 +238,17 @@ async def get_commands(device_id: str = Depends(get_device_token)):
 
     commands = []
     for row in cursor.fetchall():
+        payload_data = None
+        if row["payload"]:
+            try:
+                payload_data = json.loads(row["payload"])
+            except json.JSONDecodeError:
+                payload_data = None
+        
         commands.append(Command(
             id=row["id"],
             type=row["type"],
-            payload=eval(row["payload"]) if row["payload"] else None
+            payload=payload_data
         ))
 
     conn.close()
@@ -298,7 +306,7 @@ async def create_command(device_id: str, command_type: str, payload: Optional[di
     cursor.execute("""
         INSERT INTO commands (id, device_id, command_type, payload)
         VALUES (?, ?, ?, ?)
-    """, (command_id, device_id, command_type, str(payload) if payload else None))
+    """, (command_id, device_id, command_type, json.dumps(payload) if payload else None))
 
     conn.commit()
     conn.close()
