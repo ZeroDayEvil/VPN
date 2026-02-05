@@ -1,0 +1,24 @@
+{
+  "config_version": "1.0.0",
+  "min_client_version": "1.0.0",
+  "api": {
+    "base_url": "https://api.example.com",
+    "enroll_path": "/v1/enroll",
+    "heartbeat_path": "/v1/heartbeat",
+    "commands_path": "/v1/commands",
+    "command_result_path": "/v1/command_result"
+  },
+  "client": {
+    "heartbeat_interval_sec": 30,
+    "commands_interval_sec": 10,
+    "log_level": "info",
+    "local_http_port": 18080,
+    "local_socks_port": 18081,
+    "enable_system_proxy": true,
+    "use_pac": false,
+    "proxy_bypass": "localhost;127.0.0.1;<local>"
+  },
+  "update": {
+    "manifest_url": "https://raw.githubusercontent.com/ZeroDayEvil/VPN/main/config/manifest.json"
+  }
+}
