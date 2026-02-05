@@ -1,0 +1,8 @@
+{
+  "version": "1.0.0",
+  "config_file": "config.json",
+  "sha256": "018a637dfac4499ff923e2d02b08f1612a2c4d77e064b53e95576d6b727f12f2",
+  "min_client_version": "1.0.0",
+  "release_date": "2026-02-05T00:00:00Z",
+  "notes": "Initial MVP release"
+}
